@@ -36,3 +36,5 @@ Route::post('logout', 'Api\Administration\LoginController@logout');
 Route::get('login', 'Api\Administration\LoginController@login');
 Route::get('getAllRol', 'Api\Administration\LoginController@getAllRol');
 Route::get('info', 'Api\Administration\LoginController@info');
+
+Route::get('listAlumno', 'Api\Alumno\AlumnoController@listAlumno');
