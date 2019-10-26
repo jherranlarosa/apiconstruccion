@@ -28,7 +28,6 @@ Route::post('updateProductUnit', 'Api\Inventory\ProductUnitController@updateProd
 Route::post('deleteProductUnit', 'Api\Inventory\ProductUnitController@deleteProductUnit');
 
  
-Route::get('getClientWDocument', 'Api\Sale\SaleController@getClientWDocument');
 Route::post('saveSale', 'Api\Sale\SaleController@saveSale');
 Route::get('list', 'Api\Sale\SaleController@list');
 
@@ -46,6 +45,8 @@ Route::get('info', 'Api\Administration\LoginController@info');
 
 Route::get('listAlumno', 'Api\Alumno\AlumnoController@listAlumno');
 Route::post('createAlumno', 'Api\Alumno\AlumnoController@createAlumno');
+Route::post('updateAlumno', 'Api\Alumno\AlumnoController@updateAlumno');
+Route::get('getClientWDocument', 'Api\Alumno\AlumnoController@getClientWDocument');
 
 
 Route::get('listaUbigeo', 'Api\Alumno\UbigeoController@listaUbigeo');
