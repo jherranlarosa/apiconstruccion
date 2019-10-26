@@ -47,7 +47,7 @@ class Alumno extends Model
      */
     public function tipoalumno()
     {
-        return $this->belongsTo('App\Model\Alumno\Tipoalumno', 'idtipoalumno', 'idtipoalumno');
+        return $this->belongsTo('App\Model\Alumno\TipoAlumno', 'idtipoalumno', 'idtipoalumno');
     }
 
     /**
