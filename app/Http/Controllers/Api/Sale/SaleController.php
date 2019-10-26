@@ -21,7 +21,7 @@ class SaleController extends BaseController
      */
     public function getClientWDocument(Request $request)
     {
-        $scrp = Goutte::request('GET', 'http://aplicaciones007.jne.gob.pe/srop_publico/Consulta/Afiliado/GetNombresCiudadano?DNI='.$request->dI);
+        $scrp = Goutte::request('POST', 'http://aplicaciones007.jne.gob.pe/srop_publico/Consulta/api/AfiliadoApi/GetNombresCiudadano?CODDNI='.$request->dI);
         $scrp->filter('body');
         $response=$scrp->text();
         // $response=explode("|",$response);

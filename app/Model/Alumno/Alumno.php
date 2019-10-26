@@ -9,6 +9,9 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $idpersona
  * @property int $idtipoalumno
  * @property string $numerocarnet
+ * @property Persona $persona
+ * @property Tipoalumno $tipoalumno
+ * @property Matricula[] $matriculas
  */
 class Alumno extends Model
 {
@@ -31,4 +34,27 @@ class Alumno extends Model
      */
     protected $fillable = ['idpersona', 'idtipoalumno', 'numerocarnet'];
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function persona()
+    {
+        return $this->belongsTo('App\Model\Alumno\Persona', 'idpersona', 'idpersona');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function tipoalumno()
+    {
+        return $this->belongsTo('App\Model\Alumno\Tipoalumno', 'idtipoalumno', 'idtipoalumno');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function matriculas()
+    {
+        return $this->hasMany('App\Model\Alumno\Matricula', 'idalumno', 'idalumno');
+    }
 }

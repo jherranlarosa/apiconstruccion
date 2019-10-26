@@ -37,4 +37,18 @@ Route::get('login', 'Api\Administration\LoginController@login');
 Route::get('getAllRol', 'Api\Administration\LoginController@getAllRol');
 Route::get('info', 'Api\Administration\LoginController@info');
 
+
+
+
+
+
+
+
 Route::get('listAlumno', 'Api\Alumno\AlumnoController@listAlumno');
+Route::post('createAlumno', 'Api\Alumno\AlumnoController@createAlumno');
+
+
+Route::get('listaUbigeo', 'Api\Alumno\UbigeoController@listaUbigeo');
+Route::get('listaProvincia', 'Api\Alumno\UbigeoController@listaProvincia');
+Route::get('listaDistrito', 'Api\Alumno\UbigeoController@listaDistrito');
+Route::get('getIdUbigeo', 'Api\Alumno\UbigeoController@getIdUbigeo');

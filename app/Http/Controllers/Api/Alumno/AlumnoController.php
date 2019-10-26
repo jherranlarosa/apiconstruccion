@@ -2,7 +2,9 @@
 namespace App\Http\Controllers\Api\Alumno;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Api\BaseController as BaseController;
+use App\Model\Alumno\Alumno;
 use App\Model\Alumno\Persona;
+use App\Model\Alumno\TipoAlumno;
 use Illuminate\Support\Facades\Auth;
 use Validator;
 use Storage;
@@ -17,26 +19,45 @@ class AlumnoController extends BaseController
      */
   
 
-    public function createAlumno(Request $request)
+    
+     public function createAlumno(Request $request)
     {
-        $z=rand(100000000000,999999999999);
+
         // $z=1;
+        $timestamp = strtotime($request->fechanacimiento);  
+        $fecha = date('Y-m-d', $timestamp );
+
+        $Persona = new Persona();
+        $Persona->apaterno=$request->apaterno;        
+        $Persona->amaterno=$request->amaterno;
+        $Persona->nombre=$request->nombre;     
+        $Persona->dni=$request->dni; 
+        $Persona->sexo=$request->sexo;     
+        $Persona->fechanacimiento=$fecha;     
+        $Persona->edad=$request->edad;            
+        $Persona->correoelectronico=$request->correoelectronico;            
+        $Persona->idubigeo=$request->idubigeo;            
+        $Persona->numeroemergencia=$request->numeroemergencia;            
+        $Persona->direccion=$request->direccion;            
+        $Persona->gradoinstruccion=$request->gradoinstruccion;            
+        $Persona->celular=$request->celular;            
+        $Persona->telefono=$request->telefono;            
+        $Persona->save();        
+        
+        $TipoAlumno =TipoAlumno::where('descripcion',$request->tipoalumno)->first();
+        
         $Alumno = new Alumno();
-        $Alumno->name=$request->name;        
-        $Alumno->description=$request->description;
-        $Alumno->unitId=$request->unitId;     
-        $Alumno->categoryId=$request->categoryId; 
-        $Alumno->stock=$request->stock;     
-        $Alumno->priceRial=$request->priceRial;     
-        $Alumno->priceSale=$request->priceSale;            
-        $Alumno->codeBar=$z;            
+        $Alumno->idpersona=$Persona->idpersona;            
+        $Alumno->idtipoalumno=$TipoAlumno->idtipoalumno;            
         $Alumno->save();        
+        
+
         return $this->sendResponse($Alumno, 'Alumno create !! :)');
     }
 
     public function listAlumno()
     {
-        $Alumno=Persona::select('*')->get();
+        $Alumno=Alumno::with('persona','persona.ubigeo','tipoalumno')->select('*')->get();
         return $this->sendResponse($Alumno, 'Loaded List Successfully :)');
     }
 
