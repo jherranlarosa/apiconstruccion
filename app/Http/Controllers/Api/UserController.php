@@ -3,7 +3,7 @@
 
 namespace App\Http\Controllers\Api;
 
-
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Api\BaseController as BaseController;
 use App\Model\User;
@@ -31,12 +31,14 @@ class UserController extends BaseController
             return $this->sendError('Validation Error.', $validator->errors());       
         }
 
-
+        $token = Str::random(60);
+        $token_create=hash('sha256', $token);
         $input = $request->all();
         $input['password'] = bcrypt($input['password']);
+        $input['token'] =$token_create;
         $user = User::create($input);
-        $success['token'] =  $user->createToken('ClientApp')->accessToken;
         $success['name'] =  $user->name;
+        $success['token'] =  $token_create;
 
 
         return $this->sendResponse($success, 'User register successfully.');

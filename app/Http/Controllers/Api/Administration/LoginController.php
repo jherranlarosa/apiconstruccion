@@ -34,7 +34,7 @@ class LoginController extends BaseController
     public function login(Request $request)
     { 
 
-        $user = User::select('id','name','rolId','password')->where('name',$request->username)->first();
+        $user = User::select('id','name','rolId','password','token')->where('name',$request->username)->first();
         $rol =  UserRol::select('*')->where('id',$user->rolId)->first();
           
            if(is_null($user)) {
@@ -59,7 +59,7 @@ class LoginController extends BaseController
              $arrayRoles=[];
              array_push($arrayRoles,$rol->name);
   
-         $user->token=$user->password;
+         $user->token=$user->token;
          $user->roles=$arrayRoles;
          $user->introduction='introduction';
          $user->avatar='https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif';
@@ -102,7 +102,7 @@ public function getAllRol(Request $request)
     public function info(Request $request)
     {
 
-        $user=  User::with('userModuleRols.userRol')->where('password',$request->token)->first();
+        $user=  User::with('userModuleRols.userRol')->where('token',$request->token)->first();
         return $this->sendResponse($user,'Loaded List Category Successfully :)');
     }
 
