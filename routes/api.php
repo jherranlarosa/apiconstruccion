@@ -8,7 +8,7 @@ Route::get('/', function () {
 
 
 
-Route::post('registerUser', 'Api\RegisterController@registerUser');
+Route::post('registerUser', 'Api\UserController@registerUser');
 
 Route::get('listProduct', 'Api\Inventory\ProductController@listProduct');
 Route::post('createProduct', 'Api\Inventory\ProductController@createProduct');
